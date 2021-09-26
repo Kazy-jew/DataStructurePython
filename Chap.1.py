@@ -1,6 +1,6 @@
-from random import randrange, choice, randint
 import re
-
+from random import randrange, choice, randint
+from itertools import permutations
 
 def is_multiple(n, m):
     if n % m == 0:
@@ -189,6 +189,30 @@ def norm(v, p=2):
     return pow(sum(pow(x, p) for x in v), 1/p)
 
 #P-1.29
+def perm(a):
+    perm = permutations(a)
+    for _ in perm:
+        print(''.join(_))
 
+def perm1(a1):
+    # a1 = [c, a, t]
+    if len(a1) <= 1:
+        yield a1
+    else:
+        """ permutation(n) = n*permutation(n-1), insert the nth element into position before ith (i=1,2,3,...n-1)
+            element of each instance of permutation(n-1) as well as position after the (n-1)th element 
+        """
+        # perm ∈ [[a, t] [t, a]]
+        for perm in perm1(a1[1:]):
+            # [a , t] / [t, a]
+            for i in range(len(a1)):
+                """ 
+                    perm = [a, t]
+                    i = 0, [] + [c] + [a, t]
+                    i = 1  [a] + [c] + [t]
+                    i = 2 [a, t] + [c] + [] 
+                """
+                yield perm[:i] + a1[0:1] + perm[i:]
 
-
+print([''.join(x) for x in list(perm1(['c','a','t']))])
+# perm(['c', 'a', 't', 'd'])
