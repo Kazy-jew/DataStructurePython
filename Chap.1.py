@@ -204,9 +204,10 @@ def perm1(a1):
             element of each instance of permutation(n-1) as well as position after the (n-1)th element 
         """
         # perm ∈ [[a, t], [t, a]]
-        for i in range(len(a1)):
+        # the order of two for loops could be altered to re-arrange the result
+        for perm in perm1(a1[1:]):
             # [a , t] / [t, a]
-            for perm in perm1(a1[1:]):
+            for i in range(len(a1)):
                 """ 
                     perm = [a, t]
                     i = 0, [] + [c] + [a, t]
