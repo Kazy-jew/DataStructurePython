@@ -1,4 +1,5 @@
 import re
+import ast
 from random import randrange, choice, randint
 from itertools import permutations
 
@@ -203,9 +204,9 @@ def perm1(a1):
             element of each instance of permutation(n-1) as well as position after the (n-1)th element 
         """
         # perm ∈ [[a, t], [t, a]]
-        for perm in perm1(a1[1:]):
+        for i in range(len(a1)):
             # [a , t] / [t, a]
-            for i in range(len(a1)):
+            for perm in perm1(a1[1:]):
                 """ 
                     perm = [a, t]
                     i = 0, [] + [c] + [a, t]
@@ -214,5 +215,116 @@ def perm1(a1):
                 """
                 yield perm[:i] + a1[0:1] + perm[i:]
 
-print([''.join(x) for x in list(perm1(['c','a','t']))])
-# perm(['c', 'a', 't', 'd'])
+#P-1.30
+def count2(n):
+    i = 0
+    if n < 2:
+        print('n must greater than 2')
+    while n >= 2:
+        n = n/2
+        i += 1
+    return i
+
+#P-1.31
+def change(given, charged):
+    exchange = given - charged
+    mou = divmod(exchange, 100)
+    half_mou = divmod(mou[-1], 50)
+    twenty = divmod(half_mou[-1], 20)
+    ten = divmod(twenty[-1], 10)
+    yuan5 = divmod(ten[-1], 5)
+    yuan = yuan5[-1]
+    # lis = [mou[0], half_mou[0], twenty[0], ten[0], yuan5[0], yuan]
+    return str(mou[0]) + '百' + str(half_mou[0]) + str('五十') + str(twenty[0]) + '二十' + str(ten[0]) + '十' + str(yuan5[0]) + '五' + str(yuan) +'块'
+
+#P-1.32
+def calculator():
+    x1 = input(':')
+    operator = input()
+    x2 = input()
+    switcher = {
+        '+':1,
+        '-':2,
+        '*':3,
+        '/':4
+    }
+    operator = switcher.get(operator)
+    if operator == 1:
+        return float(x1) + float(x2)
+    elif operator == 2:
+        return float(x1) - float(x2)
+    elif operator == 3:
+        return float(x1)*float(x2)
+    elif operator == 4:
+        return float(x1)/float(x2)
+    else:
+        return 'function not supported yet'
+
+# for python 3.10 and above
+# def calculatornew():
+#     x1 = input(':')
+#     operator = input()
+#     x2 = input()
+#     match operator:
+#         case '+': return float(x1) + float(x2)
+#         case '-': return float(x1) - float(x2)
+#         case '*': return float(x1)*float(x2)
+#         case '/': return float(x1)/float(x2)
+
+#P-1.33
+# def handheld():
+# use ast ?
+
+#P-1.34
+def sentence():
+    ra = 'I will never spam my friends again'
+    randline = [randint(0, 99) for x in range(8) ]
+    for i in range(100):
+        if i not in randline:
+            print('{}.{}'.format(i+1, ra))
+        else:
+            randerror = chr(randint(97, 122))
+            ral = list(ra)
+            randindex = randint(0, len(ra)-1)
+            if ral[randindex] == ' ':
+                ral[randindex+1] = randerror
+            else:
+                ral[randindex] = randerror
+            print('{:3d}.{}'.format(i+1, ''.join(ral)))
+
+#P-1.35
+def birthday(n, sample=10000):
+    conflict = 0
+    for i in range(sample):
+        dayrange = [randint(1, 365) for x in range(n)]
+        if len(set(dayrange)) != len(dayrange):
+            conflict += 1
+    return 'Probability of Conflict is {}%.'.format(100*conflict/sample)
+
+#P-1.36
+def duplicate():
+    origin = input('Input words list: ')
+    middle = origin.split(" ")
+    result = {}
+    keys = set(middle)
+    for key in keys:
+        # count = 0
+        # for _ in middle:
+        #     if key == _:
+        #         count += 1
+        value = middle.count(key)
+        # value = count
+        result.update({key:value})
+    return result
+
+def duplicate_prototype():
+    origin = input('Input words list: ')
+    middle = origin.split(" ")
+    result = {middle[0]:1}
+    for _ in middle[1:]:
+        if _ in result:
+            result[_] += 1
+        else:
+            result.update({_:1})
+    return result
+
