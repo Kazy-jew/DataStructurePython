@@ -202,7 +202,7 @@ def perm1(a1):
         """ permutation(n) = n*permutation(n-1), insert the nth element into position before ith (i=1,2,3,...n-1)
             element of each instance of permutation(n-1) as well as position after the (n-1)th element 
         """
-        # perm ∈ [[a, t] [t, a]]
+        # perm ∈ [[a, t], [t, a]]
         for perm in perm1(a1[1:]):
             # [a , t] / [t, a]
             for i in range(len(a1)):
