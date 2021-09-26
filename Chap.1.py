@@ -160,7 +160,7 @@ def vowel_count():
 # Let's''"" try,!- Mike..?
 def remove_punctuation():
     sentence = input('Please input your sentence here: ')
-    pattern = re.compile(r"\,|'|\.|:|\?|-|\"|!|;")
+    pattern = re.compile(r",|'|\.|:|\?|-|\"|!|;")
     return pattern.sub("", sentence)
 
 #C-1.26
@@ -189,5 +189,6 @@ def norm(v, p=2):
     return pow(sum(pow(x, p) for x in v), 1/p)
 
 #P-1.29
+
 
 
