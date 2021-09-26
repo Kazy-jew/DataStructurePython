@@ -1,5 +1,5 @@
 import re
-import ast
+import system
 from random import randrange, choice, randint
 from itertools import permutations
 
@@ -273,8 +273,28 @@ def calculator():
 #         case '/': return float(x1)/float(x2)
 
 #P-1.33
-# def handheld():
-# use ast ?
+def handheld():
+    result = None
+    while True:
+        cli = input(".")
+        if '+' in cli:
+            result = float(cli.split('+')[0]) + float(cli.split('+')[-1])
+            print(result)
+        if '-' in cli:
+            result = float(cli.split('-')[0]) - float(cli.split('-')[-1])
+            print(result)
+        if '*' in cli:
+            result = float(cli.split('*')[0]) * float(cli.split('*')[-1])
+            print(result)
+        if '/' in cli:
+            result = float(cli.split('/')[0]) / float(cli.split('/')[-1])
+            print(result)
+        reset = input('clear:')
+        if reset == 'e':
+            exit()
+        else:
+            system('cls')
+        # return result
 
 #P-1.34
 def sentence():
@@ -329,3 +349,4 @@ def duplicate_prototype():
             result.update({_:1})
     return result
 
+handheld()
