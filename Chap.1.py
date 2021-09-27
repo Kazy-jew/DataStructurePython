@@ -1,5 +1,4 @@
 import re
-import system
 from random import randrange, choice, randint
 from itertools import permutations
 
@@ -293,7 +292,7 @@ def handheld():
         if reset == 'e':
             exit()
         else:
-            system('cls')
+            result = 0
         # return result
 
 #P-1.34
